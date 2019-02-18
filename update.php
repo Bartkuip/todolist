@@ -1,10 +1,19 @@
 <?php 
-$sql = "SELECT * FROM users";
+try {
+  $connection = new PDO($dsn, $username, $password, $options);
 
-$statement = $connection->prepare($sql);
-$statement->execute();
+  $sql = "SELECT * FROM users";
 
-$result = $statement->fetchAll();
+  $statement = $connection->prepare($sql);
+  $statement->execute();
 
+  $result = $statement->fetchAll();
 
+} catch(PDOException $error) {
+  echo $sql . "<br>" . $error->getMessage();
+}
 ?>
+
+<?php echo (["users"]); ?>
+
+<a href="index.php">Back to home</a>
