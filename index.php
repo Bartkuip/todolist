@@ -44,6 +44,9 @@
               <tr>
                 <td><?php echo $row['name']; ?></td>
                 <td>
+                  <input type="text" name="createTask" class="form-control"
+                   value="<?php echo $createTask; ?>" placeholder="Nieuwe taak">
+                  <button type="submit" class="btn btn-primary" name="createTask">Toevoegen</button>
                   <a href="index.php?edit=<? echo $row['id']; ?>"
                     class="btn btn-info">Aanpassen</a>
                   <a href="process.php?delete=<?php echo $row['id']; ?>"
@@ -54,14 +57,7 @@
         </table>
       </div>
     
-      <?php
-        function pre_r( $array ) {
-        echo '<pre>';
-        print_r( $array );
-        echo '</pre>';
-        }
-    ?>
-
+  
     <div class="row justify-content-center">
       <form action="process.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id; ?>">

@@ -10,8 +10,10 @@ $name = '';
 $mysqli = new mysqli('localhost', 'root', 'admin', 'crud') or die(mysqli_error($mysqli));
 
 
-if (isset($_POST['open'])){
-
+if (isset($_POST['createTask'])){
+	$id = $_GET['createTask'];
+	$mysqli->query("INSERT INTO data (taken) VALUES('')") or
+			die($mysqli->error);
 }
 
  if (isset($_POST['save'])){
