@@ -12,10 +12,7 @@
 
     <?php 
       if (isset($_SESSION['message'])): ?>
-
       <div class="alert alert-<?=$_SESSION['msg_type']?>">
-
-
         <?php
           echo $_SESSION['message'];
           unset($_SESSION['message']);
@@ -44,12 +41,16 @@
               <tr>
                 <td><?php echo $row['name']; ?></td>
                 <td>
-                  <input type="text" name="createTask" class="form-control"
-                   value="<?php echo $createTask; ?>" placeholder="Nieuwe taak">
-                  <button type="submit" class="btn btn-primary" name="createTask">Toevoegen</button>
+                  <form action="process.php" method="POST">
+                     <input type="text" name="task" class="form-control" value="<?php echo $task; ?>" placeholder="<?php echo $row['name']; ?>">
+
+                    <button type="submit" class="btn btn-primary" name="create">Toevoegen</button>
+                  </form>
+                  
                   <a href="index.php?edit=<? echo $row['id']; ?>"
                     class="btn btn-info">Aanpassen</a>
-                  <a href="process.php?delete=<?php echo $row['id']; ?>"
+                  
+                  <a href="process.php?delete=<?php echo $row['id']; ?>" 
                     class="btn btn-danger">Verwijderen</a>
                 </td>
               </tr>
@@ -61,20 +62,19 @@
     <div class="row justify-content-center">
       <form action="process.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
+          <div class="form-group">
+            <label>Lijst aanmaken/aanpassen</label>
+              <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" placeholder="Nieuwe lijst">
+          </div>
         <div class="form-group">
-        <label>Lijst aanmaken/aanpassen</label>
-        <input type="text" name="name" class="form-control"
-               value="<?php echo $name; ?>" placeholder="Nieuwe lijst">
-      </div>
-      <div class="form-group">
-      <?php 
-      if ($update == true):
-      ?>
-        <button type="submit" class="btn btn-info" name="update">Aanpassen</button>
-      <?php else: ?>
-        <button type="submit" class="btn btn-primary" name="save">Opslaan</button>
-      <?php endif; ?>
-      </div>
+          <?php 
+          if ($update == true):
+          ?>
+            <button type="submit" class="btn btn-info" name="update">Aanpassen</button>
+          <?php else: ?>
+            <button type="submit" class="btn btn-primary" name="save">Toevoegen</button>
+          <?php endif; ?>
+        </div>
       </form>
     </div>
   </div>

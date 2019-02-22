@@ -5,21 +5,26 @@ session_start();
 $id = 0;
 $update = false;
 $name = '';
+$create = '';
 
 // inloggen op phpmyadmin, localhost, naam, login, database naam
 $mysqli = new mysqli('localhost', 'root', 'admin', 'crud') or die(mysqli_error($mysqli));
 
 
-if (isset($_POST['createTask'])){
-	$id = $_GET['createTask'];
-	$mysqli->query("INSERT INTO data (taken) VALUES('')") or
+if (isset($_POST['create'])){
+	$task = $_POST['task'];
+	$mysqli->query("INSERT INTO tasks (task) VALUES('$task'), INSERT INTO tasks (listid) VALUES('')") or
 			die($mysqli->error);
+
+
+	$_SESSION['message'] = "Aangemaakt!";
+	$_SESSION['msg_type'] = "success";
+
+	header('Location:index.php');
 }
 
- if (isset($_POST['save'])){
+if (isset($_POST['save'])){
 	$name = $_POST['name'];
-
-
 
 	$mysqli->query("INSERT INTO data (name) VALUES('$name')") or
 			die($mysqli->error);
